@@ -12,11 +12,12 @@
 task main()
 {
   int distance = 0;
+  int setDistance;
 
-  while(getButtonPress(buttonEnter) != 1);
+  while(true)
   {
-    displayBigTextLine(3, "Input Distance to Travel");
-    displayBigTextLine(6, "Distance (cm) %d", distance);
+    displayBigTextLine(3, "Input Distance");
+    displayBigTextLine(6, "Distance %dcm", distance);
 
     if(getButtonPress(buttonUp) == 1)
     {
@@ -30,19 +31,52 @@ task main()
       sleep(250);
     }
 
-    sleep(250)
+    if(getButtonPress(buttonRight) == 1)
+    {
+      setDistance = distance
+      sleep(250);
+      break;
+    }
+
+    sleep(250);
   }
 
-		int wheelDiameter = 7;
+  eraseDisplay();
+  displayBigTextLine(3, "Waking up Robot ...");
+  sleep(3000);
+  displayBigTextLine(3, ".......");
+  sleep(3000);
+  setSoundVolume(30);
+  drawBmpfile(0, 127, "Tired left");
+  playSoundFile("Okay");
+  sleep(3000);
+  eraseDisplay();
+  displayBigTextLine(3, "Travel Distance Set");
+  displayBigTextLine(6, "	%dcm", setDistance);
+  sleep(3000);
+  setLEDColor(ledRed);
+  sleep(1500);
+  setLEDColor(ledOrange);
+  clearSounds();
+  sleep(1500);
+  setLEDColor(ledGreen);
+  clearSounds();
+  sleep(1500);
+  playSoundFile("Horn 1");
+  sleep(1500);
 
-		float circumference = 3.14 * wheelDiameter;
 
-		float numberOfRotations = Distance / circumference;
 
-		forward(numberOfRotations, rotations, 30);
+	int wheelDiameter = 7;
 
-		sleep(3000);
+	float circumference = 3.14 * wheelDiameter;
 
-		backward(numberOfRotations, rotations, 30);
+	float numberOfRotations = Distance / circumference;
+
+	forward(numberOfRotations, rotations, 30);
+
+	sleep(3000);
+
+	backward(numberOfRotations, rotations, 30);
 
 }
